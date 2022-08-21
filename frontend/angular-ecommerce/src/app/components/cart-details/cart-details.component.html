@@ -1,0 +1,122 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div *ngIf="cartItems.length > 0">
+                <div class="row py-5 p-4 bg-white rounded shadow-sm align-middle">
+                    <div class="col-sm-8">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="p-2 px-3 text-uppercase">Product</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Price</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Quantity</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Remove</div>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let item of cartItems">
+                                    <th scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <img src="{{item.imageUrl}}" class="img-responsive" width="150px">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <h5 class="mb-0">
+                                                    <p>{{item.name}}</p>
+                                                </h5>
+                                                <!-- <span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span> -->
+                                            </div>
+                                        </div>
+                                    </th>
+
+                                    <td class="border-0 align-middle">
+                                        <strong>{{item.unitPrice | currency:"USD"}}</strong>
+                                    </td>
+
+                                    <td class="border-0 align-middle">
+                                        <div class="row no-gutters">
+                                            <div class="col-sm-3">
+                                                <button (click)="incrementQuantity(item)"
+                                                    class="btn btn-primary btn-sm btn-dark">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                {{item.quantity}}
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <button (click)="decrementQuantity(item)"
+                                                    class="btn btn-primary btn-sm btn-dark">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- <strong>{{item.quantity}}</strong> -->
+                                    </td>
+
+                                    <td class="border-0 align-middle">
+                                        <a class="text-dark" (click)="remove(item)">
+                                            <i class="fa fa-trash">
+                                            </i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="col-sm-4">
+                        <div class="bg-light px-4 py-3 text-uppercase font-weight-bold">Order summary
+                        </div>
+                        <div class="p-4">
+                            <p class="font-italic mb-4">
+                                Shipping Information
+                            </p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                        class="text-muted">Order Subtotal </strong><strong>{{totalQuantity}}</strong></li>
+                                <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                        class="text-muted">Shipping</strong><strong>FREE</strong></li>
+                                <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                        class="text-muted">Total Price</strong>
+                                    <h5 class="font-weight-bold">{{totalPrice | currency:'USD'}}</h5>
+                                </li>
+                            </ul>
+                            <div *ngIf="isAuthenticated">
+                                <a routerLink="/checkout" class="btn btn-dark rounded-pill py-2 btn-block">
+                                    Procceed to checkout
+                                </a>
+                            </div>
+
+                            <div *ngIf="!isAuthenticated">
+                                <a  routerLink="/login" class="btn btn-dark rounded-pill py-2 btn-block">
+                                    Procceed to checkout
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div *ngIf="cartItems.length == 0" class="alert alert-warning col-md-12" role="alert">
+                Your Shopping Cart is Empty.
+            </div>
+
+        </div>
+    </div>
+</div>
