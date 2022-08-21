@@ -1,0 +1,42 @@
+package com.qqq.ecommerce.entity;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+/**
+ * Created by QQQ on 2022/8/4 21:43
+ */
+@Entity
+@Table(name = "address")
+@Getter
+@Setter
+public class Address {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "street")
+    private String street;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "zip_code")
+    private String zipCode;
+
+//   Order
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Order order;
+
+}
